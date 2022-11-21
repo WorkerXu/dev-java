@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+    workspace:
+      build:
+        context: .
+        args:
+          - JAVA_VERSION=${JAVA_VERSION}
+          - USERNAME=${USERNAME}
+          - USER_UID=${USER_UID}
+          - LANG=${LANG}
+          - MAVEN_VERSION=${MAVEN_VERSION}
+          - MAVEN_SHA=${MAVEN_SHA}
+          - MAVEN_HOME=${MAVEN_HOME}
+          - TOMCAT_VERSION=${TOMCAT_VERSION}
+          - TOMCAT_SHA=${TOMCAT_SHA}
+          - CATALINA_HOME=${CATALINA_HOME}
+          - GRADLE_HOME=${GRADLE_HOME}
+          - GRADLE_VERSION=${GRADLE_VERSION}
+      volumes:
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ~/.ssh:/home/vscode/.ssh
+      ports:
+        - "${WORKSPACE_SERVE_HOST_PORT}:8080"
+      tty: true
